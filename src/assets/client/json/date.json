@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "date": "Oct 14, 2022",
+    "day": "Thurs",
+    "typeOfDay": "weekday",
+    "vip": 0
+  },
+  {
+    "id": 2,
+    "date": "Oct 15, 2022",
+    "day": "Fri",
+    "typeOfDay": "weekday",
+    "vip": 0
+  },
+  {
+    "id": 3,
+    "date": "Oct 16, 2022",
+    "day": "Sat",
+    "typeOfDay": "weekend",
+    "vip": 0
+  },
+  {
+    "id": 4,
+    "date": "Oct 17, 2022",
+    "day": "Sun",
+    "typeOfDay": "weekend",
+    "vip": 1
+  },
+  {
+    "id": 5,
+    "date": "Oct 18, 2022",
+    "day": "Mon",
+    "typeOfDay": "weekday",
+    "vip": 2
+  },
+  {
+    "id": 6,
+    "date": "Oct 19, 2022",
+    "day": "Tue",
+    "typeOfDay": "weekday",
+    "vip": 3
+  }
+]
