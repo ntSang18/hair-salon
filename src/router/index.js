@@ -6,8 +6,8 @@ import HomeAdmin from '@/layouts/HomeAdmin.vue';
 import Booking from '@/views/admin/booking/Booking.vue';
 import MyBooking from '@/views/admin/booking/MyBooking.vue';
 
-// import Account from '@/views/admin/employee/Account.vue';
-// import DetailAccount from '@/views/admin/employee/DetailAccount.vue';
+import Account from '@/views/admin/employee/Account.vue';
+import DetailAccount from '@/views/admin/employee/DetailAccount.vue';
 
 import Login from '@/views/admin/login/Login.vue';
 // import ChangePassword from '@/views/admin/login/ChangePassword.vue';
@@ -42,21 +42,21 @@ const routes = [
       title: 'Home',
     },
     children: [
-    //   {
-    //     path: '/accounts',
-    //     component: Account,
-    //     meta: {
-    //       title: 'Account',
-    //     },
-    //     children: [],
-    //   },
-    //   {
-    //     path: '/accounts/:id',
-    //     component: DetailAccount,
-    //     meta: {
-    //       title: 'Profile',
-    //     },
-    //   },
+      {
+        path: '/accounts',
+        component: Account,
+        meta: {
+          title: 'Account',
+        },
+        children: [],
+      },
+      {
+        path: '/accounts/:id',
+        component: DetailAccount,
+        meta: {
+          title: 'Profile',
+        },
+      },
       {
         path: '/bookings',
         component: Booking,
