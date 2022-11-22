@@ -3,8 +3,8 @@ import checkMiddleware from './middleware';
 
 // ADMIN
 import HomeAdmin from '@/layouts/HomeAdmin.vue';
-// import Booking from '@/views/admin/booking/Booking.vue';
-// import MyBooking from '@/views/admin/booking/MyBooking.vue';
+import Booking from '@/views/admin/booking/Booking.vue';
+import MyBooking from '@/views/admin/booking/MyBooking.vue';
 
 // import Account from '@/views/admin/employee/Account.vue';
 // import DetailAccount from '@/views/admin/employee/DetailAccount.vue';
@@ -57,13 +57,13 @@ const routes = [
     //       title: 'Profile',
     //     },
     //   },
-    //   {
-    //     path: '/bookings',
-    //     component: Booking,
-    //     meta: {
-    //       title: 'Booking',
-    //     },
-    //   },
+      {
+        path: '/bookings',
+        component: Booking,
+        meta: {
+          title: 'Booking',
+        },
+      },
     //   {
     //     path: '/departments',
     //     component: Department,
@@ -142,13 +142,13 @@ const routes = [
     //       title: 'Payment',
     //     },
     //   },
-    //   {
-    //     path: 'mybooking/:id',
-    //     component: MyBooking,
-    //     meta: {
-    //       title: 'MyBooking',
-    //     },
-    //   },
+      {
+        path: 'mybooking/:id',
+        component: MyBooking,
+        meta: {
+          title: 'MyBooking',
+        },
+      },
     ],
   },
 ];
