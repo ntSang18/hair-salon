@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1, 
+    "type": "Cutting", 
+    "isDeleted": false ,
+    "services": [
+      {
+        "id": 1,
+        "name": "Cutting 1",
+        "description": "description1",
+        "price": "50K"
+      },
+      {
+        "id": 2,
+        "name": "Cutting 2",
+        "description": "description2",
+        "price": "60K"
+      },
+      {
+        "id": 3,
+        "name": "Cutting 3",
+        "description": "description3",
+        "price": "70K"
+      }
+    ]
+  },
+  {
+    "id": 2, 
+    "type": "Shampoo", 
+    "isDeleted": false ,
+    "services": [
+      {
+        "id": 4,
+        "name": "Cutting 4",
+        "description": "description4",
+        "price": "50K"
+      },
+      {
+        "id": 5,
+        "name": "Cutting 5",
+        "description": "description5",
+        "price": "60K"
+      },
+      {
+        "id": 6,
+        "name": "Cutting 6",
+        "description": "description6",
+        "price": "70K"
+      }
+    ]
+  }
+]
