@@ -64,20 +64,20 @@ const routes = [
       //       title: 'Booking',
       //     },
       //   },
-      //   {
-      //     path: '/departments',
-      //     component: Department,
-      //     meta: {
-      //       title: 'Department',
-      //     },
-      //   },
-      //   {
-      //     path: '/customers',
-      //     component: Customer,
-      //     meta: {
-      //       title: 'Customer',
-      //     },
-      //   },
+      {
+        path: '/departments',
+        component: Department,
+        meta: {
+          title: 'Department',
+        },
+      },
+      {
+        path: '/customers',
+        component: Customer,
+        meta: {
+          title: 'Customer',
+        },
+      },
       //   {
       //     path: '/services',
       //     component: Service,
@@ -114,13 +114,13 @@ const routes = [
       //       title: 'Error',
       //     },
       //   },
-      //   {
-      //     path: 'staffs/:id/password',
-      //     component: ChangePassword,
-      //     meta: {
-      //       title: 'ChangePassword',
-      //     },
-      //   },
+      {
+        path: 'staffs/:id/password',
+        component: ChangePassword,
+        meta: {
+          title: 'ChangePassword',
+        },
+      },
       {
         path: 'sales',
         component: Sales,
