@@ -21,9 +21,9 @@ import DetailService from '@/views/admin/service/DetailService';
 import Sales from '@/views/admin/sales/Sales';
 import Salary from '@/views/admin/salary/Salary';
 
-// import Error from '@/views/admin/error/Error';
-// import Discount from '@/views/admin/discount/Discount';
-// import Payment from '@/views/admin/payment/Payment';
+import Error from '@/views/admin/error/Error';
+import Discount from '@/views/admin/discount/Discount';
+import Payment from '@/views/admin/payment/Payment';
 
 const routes = [
   {
@@ -99,21 +99,21 @@ const routes = [
           title: 'ServiceType',
         },
       },
-      //   {
-      //     path: '/discounts',
-      //     component: Discount,
-      //     meta: {
-      //       title: 'Discount',
-      //     },
-      //   },
-      //   {
-      //     path: '/:pathMatch(.*)*',
-      //     component: Error,
-      //     name: 'Error',
-      //     meta: {
-      //       title: 'Error',
-      //     },
-      //   },
+        {
+          path: '/discounts',
+          component: Discount,
+          meta: {
+            title: 'Discount',
+          },
+        },
+        {
+          path: '/:pathMatch(.*)*',
+          component: Error,
+          name: 'Error',
+          meta: {
+            title: 'Error',
+          },
+        },
       {
         path: 'staffs/:id/password',
         component: ChangePassword,
@@ -135,13 +135,13 @@ const routes = [
           title: 'Salary',
         },
       },
-      //   {
-      //     path: 'payments',
-      //     component: Payment,
-      //     meta: {
-      //       title: 'Payment',
-      //     },
-      //   },
+        {
+          path: 'payments',
+          component: Payment,
+          meta: {
+            title: 'Payment',
+          },
+        },
       {
         path: 'mybooking/:id',
         component: MyBooking,
