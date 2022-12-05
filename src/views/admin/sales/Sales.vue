@@ -15,6 +15,72 @@
         </el-select>
       </div>
     </div>
+
+    <div v-if="booking.all">
+      <div
+        style="
+          margin-left: 30px;
+          margin-top: 20px;
+          padding-left: 20px;
+          font-weight: 600;
+          border-left: 10px solid #6741d9;
+        "
+      >
+        Bill
+      </div>
+      <el-table
+        ref="multipleTableRef"
+        :data="billPaginate.all"
+        border
+        @selection-change="handleSelectionChange"
+        style="margin: 30px 0px 20px 0px"
+      >
+        <el-table-column label="Customer">
+          <template #default="scope">
+            <div>
+              {{ scope.row.customer.name || '__' }}
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column label="Staff">
+          <template #default="scope">
+            <div>
+              {{ scope.row.staff.name }}
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column label="Price">
+          <template #default="scope">
+            <div>
+              {{ convertCurrency(scope.row.price) }}
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column label="createdAt">
+          <template #default="scope">
+            <div>
+              {{ Convert(scope.row.createdAt) }}
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column label="BookingId">
+          <template #default="scope">
+            <div>
+              {{ scope.row.bookingId || '__' }}
+            </div>
+          </template>
+        </el-table-column>
+      </el-table>
+      <el-pagination
+        class="d-flex justify-content-center"
+        :page-size="billPaginate.pageSize"
+        layout="prev, pager, next"
+        :page-count="billPaginate.totalPage"
+        v-model:currentPage="billPaginate.page"
+        @current-change="getBillPaginates"
+      >
+      </el-pagination>
+    </div>
     <div v-if="booking.all">
       <div
         style="
@@ -34,8 +100,12 @@
             <div class="total">{{ booking.done }}</div>
           </div>
           <div class="item">
+            <div class="title">Bill</div>
+            <div class="total">{{ bills.totalBill }}</div>
+          </div>
+          <div class="item">
             <div class="title">TOTAL EARNINGS</div>
-            <div class="total" v-if="totalPrices">{{ convertCurrency(totalPrices) }}</div>
+            <div class="total">{{ convertCurrency(bills.totalPrices) }}</div>
           </div>
           <div class="item">
             <div class="title">NEW CUSTOMER</div>
@@ -166,6 +236,7 @@ import StaffService from '@/services/StaffService';
 import BillService from '@/services/BillService';
 import CustomerService from '@/services/CustomerService';
 import BookingService from '@/services/BookingService';
+import ConvertNpm from '@hvtruong2209/convert-datetime';
 
 import BarChart from '@/components/admin/BarChart';
 import Doughnut from '@/components/admin/DoughnutChart';
@@ -200,6 +271,13 @@ export default {
       bills: {
         all: [],
         totalPrices: 0,
+        totalBill: 0,
+      },
+      billPaginate: {
+        all: [],
+        page: 1,
+        pageSize: 10,
+        totalPage: 0,
       },
     };
   },
@@ -213,8 +291,14 @@ export default {
   },
   mounted() {
     this.init();
+    const date = new Date();
+    this.month = date.getMonth() + 1;
+    this.year = date.getFullYear();
   },
   methods: {
+    Convert(datetime) {
+      return ConvertNpm.dateToString(datetime);
+    },
     init() {
       this.booking = {};
       this.bills = {};
@@ -225,6 +309,7 @@ export default {
       this.getNewCustomer();
       this.getBooking();
       this.getBills();
+      this.getBillPaginates();
     },
     sortArr(arrParam, option) {
       let arr = [...arrParam];
@@ -269,10 +354,23 @@ export default {
       }
     },
     async getBills() {
-      const response = await BillService.getBills(this.startDate, this.endDate);
+      const response = await BillService.getBills(this.startDate, this.endDate, null, null);
       if (response && response.status == '200') {
         this.bills.all = response.data.bills;
-        this.totalPrices = this.bills.all.reduce((a, b) => a + b.price, 0);
+        this.bills.totalPrices = this.bills.all.reduce((a, b) => a + b.price, 0);
+        this.bills.totalBill = this.bills.all.length;
+      }
+    },
+    async getBillPaginates() {
+      const response = await BillService.getBills(
+        this.startDate,
+        this.endDate,
+        this.billPaginate.page,
+        this.billPaginate.pageSize,
+      );
+      if (response && response.status == '200') {
+        this.billPaginate.all = response.data.bills;
+        this.billPaginate.totalPage = response.data.totalPage;
       }
     },
     convertCurrency(vnd) {
@@ -295,6 +393,7 @@ export default {
   flex-direction: column;
   border: 2px solid #fab005;
   transition-duration: 0.5s;
+  margin-top: 20px;
 }
 .item:hover {
   box-shadow: 0 5px 15px rgb(250, 176, 5, 0.9);

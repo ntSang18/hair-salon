@@ -357,7 +357,6 @@ export default {
         // send firebase
 
         this.arrayNotify.forEach(el => {
-          console.log(el);
           push(ref(database, 'notify-customer'), {
             bookingDate: el.date,
             toUser: el.customerId,
