@@ -11,18 +11,21 @@ import DetailAccount from '@/views/admin/employee/DetailAccount.vue';
 
 import Login from '@/views/admin/login/Login.vue';
 import ChangePassword from '@/views/admin/login/ChangePassword.vue';
+
 import Department from '@/views/admin/employee/Department.vue';
 import Customer from '@/views/admin/employee/Customer.vue';
-
 import Service from '@/views/admin/service/Service';
 import ServiceType from '@/views/admin/service/ServiceType';
+
 import DetailService from '@/views/admin/service/DetailService';
 
 import Sales from '@/views/admin/sales/Sales';
+
 import Salary from '@/views/admin/salary/Salary';
 
 import Error from '@/views/admin/error/Error';
 import Discount from '@/views/admin/discount/Discount';
+
 import Payment from '@/views/admin/payment/Payment';
 
 const routes = [
@@ -99,21 +102,21 @@ const routes = [
           title: 'ServiceType',
         },
       },
-        {
-          path: '/discounts',
-          component: Discount,
-          meta: {
-            title: 'Discount',
-          },
+      {
+        path: '/discounts',
+        component: Discount,
+        meta: {
+          title: 'Discount',
         },
-        {
-          path: '/:pathMatch(.*)*',
-          component: Error,
-          name: 'Error',
-          meta: {
-            title: 'Error',
-          },
+      },
+      {
+        path: '/:pathMatch(.*)*',
+        component: Error,
+        name: 'Error',
+        meta: {
+          title: 'Error',
         },
+      },
       {
         path: 'staffs/:id/password',
         component: ChangePassword,
@@ -135,13 +138,13 @@ const routes = [
           title: 'Salary',
         },
       },
-        {
-          path: 'payments',
-          component: Payment,
-          meta: {
-            title: 'Payment',
-          },
+      {
+        path: 'payments',
+        component: Payment,
+        meta: {
+          title: 'Payment',
         },
+      },
       {
         path: 'mybooking/:id',
         component: MyBooking,
