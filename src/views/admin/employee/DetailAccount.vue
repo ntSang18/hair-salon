@@ -169,7 +169,7 @@ export default {
       const response = await StaffService.getStaff(id);
       if (response && response.status == '200') {
         this.account = response.data;
-        this.account.imagePath = this.account.imagePath ? `http://${this.account.imagePath}` : '';
+        this.account.imagePath = this.account.imagePath ? `${this.account.imagePath}` : '';
         this.constAccount = { ...response.data };
         this.gender = this.account.gender == true ? 'Male' : 'Female';
         this.role.label = this.account.role.name;
@@ -191,7 +191,6 @@ export default {
         if (this.imagePicked) {
           obj.append('images', this.imagePicked);
         }
-        console.log(obj);
         const response = await StaffService.updateStaff(this.account.Id, obj);
         if (response) {
           this.$store.state.toast.success('Update information success');

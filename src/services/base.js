@@ -19,8 +19,8 @@ export default class BaseService {
       header.Authorization = `Bearer ${storeClient.state.token}`;
     }
     const instance = axios.create({
-      baseURL: 'http://localhost:3000/api/v1/',
-      // baseURL: 'https://salon-hair-v2.herokuapp.com/api/v1/',
+      // baseURL: 'http://localhost:3001/api/v1/',
+      baseURL: process.env.VUE_APP_host_user_service,
       headers: header,
     });
     return instance;
@@ -37,8 +37,8 @@ export default class BaseService {
       header.Authorization = `Bearer ${storeClient.state.token}`;
     }
     const instance = axios.create({
-      baseURL: 'http://localhost:4000/api/v1/',
-      // baseURL: 'https://salon-hair-v2.herokuapp.com/api/v1/',
+      // baseURL: 'http://localhost:3000/api/v1/',
+      baseURL: process.env.VUE_APP_host_ad_service,
       headers: header,
     });
     return instance;

@@ -10,7 +10,7 @@
         mode="horizontal"
         default-active="2-1"
       >
-        <el-sub-menu index="2">
+        <el-sub-menu index="2" v-if="role == 3">
           <template #title>
             <span class="span-menu">Employees</span>
           </template>
@@ -28,36 +28,40 @@
           <template #title>
             <span class="span-menu">Booking</span>
           </template>
-          <el-menu-item index="3-1"
+          <el-menu-item index="3-1" v-if="role == 2"
             ><router-link :to="'/mybooking/' + id" class="router-item span-menu"
               >My Appointment</router-link
             ></el-menu-item
           >
-          <el-menu-item index="3-2"
+          <el-menu-item index="3-2" v-if="role == 3 || role == 1"
             ><router-link to="/bookings" class="router-item span-menu">Booking</router-link></el-menu-item
           >
         </el-sub-menu>
         <el-menu-item index="4">
           <template #title>
-            <router-link to="/salary" class="router-item span-menu">Salary</router-link>
+            <router-link to="/salary" class="router-item span-menu" v-if="role == 3">Salary</router-link>
           </template>
         </el-menu-item>
         <el-menu-item index="5">
           <template #title>
-            <router-link to="/services" class="router-item span-menu">Services</router-link>
+            <router-link to="/services" class="router-item span-menu" v-if="role == 3 || role == 1"
+              >Services</router-link
+            >
           </template>
         </el-menu-item>
         <el-menu-item index="6">
           <template #title>
-            <router-link to="/discounts" class="router-item span-menu">Discounts</router-link>
+            <router-link to="/discounts" class="router-item span-menu" v-if="role == 3 || role == 1"
+              >Discounts</router-link
+            >
           </template>
         </el-menu-item>
-        <el-menu-item index="7">
+        <el-menu-item index="7" v-if="role == 3">
           <template #title>
             <router-link to="/sales" class="router-item span-menu">Sales</router-link>
           </template>
         </el-menu-item>
-        <el-menu-item index="8">
+        <el-menu-item index="8" v-if="role == 3 || role == 1">
           <template #title>
             <router-link to="/payments" class="router-item span-menu">Payment</router-link>
           </template>
@@ -72,11 +76,13 @@ export default {
   data() {
     return {
       id: '',
+      role: null,
     };
   },
   mounted() {
     document.querySelectorAll('.el-sub-menu__icon-arrow').forEach(el => el.remove());
     this.id = this.$store.state.staff.Id;
+    this.role = this.$store.state.staff.roleId;
   },
 };
 </script>

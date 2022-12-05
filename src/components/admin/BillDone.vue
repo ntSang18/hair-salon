@@ -118,7 +118,6 @@ export default {
       this.bill.discount = this.bill.subTotal - this.booking.price;
 
       let discountCustomerType = (this.bill.subTotal * this.booking.customer.customerType.percent) / 100;
-      console.log(discountCustomerType);
       let discountCVoucher = ((this.bill.subTotal - discountCustomerType - this.bill.total) / this.bill.subTotal) * 100;
       // case 0: default = 0
       // case 1: no booking in bill

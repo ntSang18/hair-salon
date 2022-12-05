@@ -13,6 +13,7 @@
     "@fullcalendar/daygrid": "^5.11.3",
     "@fullcalendar/interaction": "^5.11.3",
     "@fullcalendar/vue3": "^5.11.2",
+    "@hvtruong2209/convert-datetime": "^3.4.0",
     "@popperjs/core": "^2.11.6",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.1",

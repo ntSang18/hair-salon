@@ -125,12 +125,6 @@ export default {
         }
       });
     },
-    renderNotify() {
-      document.querySelector('.notify').style.display = 'flex';
-      setTimeout(() => {
-        document.querySelector('.notify').style.display = 'none';
-      }, 5000);
-    },
   },
   components: { ArrowDown },
 };

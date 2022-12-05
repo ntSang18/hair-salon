@@ -316,19 +316,6 @@
       </div>
     </div>
   </div>
-  <section id="newsletter">
-    <div class="newstext">
-      <h4>Sign Up For Newsletters</h4>
-      <p>
-        Get E-mail updates about our services and
-        <span>special offers.</span>
-      </p>
-    </div>
-    <div class="form">
-      <input type="text" placeholder="Your email address" />
-      <button>Sign up</button>
-    </div>
-  </section>
 </template>
 
 <script>
@@ -478,6 +465,11 @@ export default {
       let res = await Promise.all([ServiceService.getServiceTypes(), StaffService.getBarberRankings()]);
       if (res[0].status == '200' && res[1].status == '200') {
         this.service.listService = res[0].data;
+        for (let i = 0; i < this.service.listService.length; i++) {
+          this.service.listService[i].services = this.service.listService[i].services.filter(service => {
+            return !service.isDeleted;
+          });
+        }
         this.stylist.listStylist = res[1].data.staffs;
         this.service.listService.forEach(
           serviceType => (this.service.services = this.service.services.concat(serviceType.services)),
@@ -585,7 +577,6 @@ export default {
         if (this.ad) {
           obj.advertisementId = this.ad.Id;
         }
-        console.log(obj);
         const res = await BookingService.createBooking(obj);
         if (res.status == '200') {
           this.$store.state.toast.success('Booking successful!');
@@ -595,7 +586,6 @@ export default {
             bookingDate: this.datePicked.value,
             customerId: this.$store.state.customer.Id,
           };
-          console.log(obj);
           await this.createNotification(obj);
           // this.clearBookingForm();
         } else {

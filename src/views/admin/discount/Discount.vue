@@ -27,15 +27,74 @@
           </div>
         </div>
       </div>
-      <div style="padding: 0px 100px; width: 100%">
+      <div style="padding-left: 100px; width: 100%">
         <div style="margin-top: 20px; padding-left: 20px; font-weight: 600; border-left: 10px solid #6741d9">
           Advertisement
         </div>
-        <div style="margin-top: 20px">
-          <div v-for="ad in ads" :key="ad.Id" class="list-ad">
-            <div>{{ ad.title }}</div>
-          </div>
-        </div>
+        <el-table
+          ref="multipleTableRef"
+          :data="ads"
+          border
+          @selection-change="handleSelectionChange"
+          style="margin-top: 30px"
+        >
+          <el-table-column label="Title" width="120px">
+            <template #default="scope">
+              <div style="word-break: break-word">
+                {{ scope.row.title }}
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column label="Detail" width="400px">
+            <template #default="scope">
+              <div style="word-break: break-word">
+                {{ scope.row.detail }}
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column label="Amount">
+            <template #default="scope">
+              <div>
+                {{ scope.row.amount }}
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column label="Code">
+            <template #default="scope">
+              <div>
+                {{ scope.row.voucherCode }}
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column label="startDate">
+            <template #default="scope">
+              <div>
+                {{ Convert(scope.row.startDate) }}
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column label="endDate">
+            <template #default="scope">
+              <div>
+                {{ Convert(scope.row.endDate) }}
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column property="action" label="Action">
+            <template #default="scope">
+              <div class="d-flex justify-content-center">
+                <div class="icon" @click="deleteAd(scope.row.Id)" style="margin: -1px 0px 0px 5px">
+                  <svg fill="#5646ab" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-029747aa="">
+                    <path
+                      fill="#5646ab"
+                      d="M160 256H96a32 32 0 0 1 0-64h256V95.936a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32V192h256a32 32 0 1 1 0 64h-64v672a32 32 0 0 1-32 32H192a32 32 0 0 1-32-32V256zm448-64v-64H416v64h192zM224 896h576V256H224v640zm192-128a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32zm192 0a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </template>
+          </el-table-column>
+        </el-table>
         <div class="item-create" @click="clickNewAd">
           <div class="icon">
             <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-029747aa="">
@@ -46,6 +105,7 @@
             </svg>
           </div>
         </div>
+
         <div v-if="createAdShow" class="d-flex justify-content-around">
           <div>
             <div>Title:</div>
@@ -113,6 +173,7 @@
 import Title from '@/components/admin/Title';
 import CustomerTypeService from '@/services/CustomerTypeService';
 import AdvertisementService from '@/services/AdvertisementService';
+import ConvertNpm from '@hvtruong2209/convert-datetime';
 
 export default {
   components: {
@@ -142,6 +203,10 @@ export default {
     this.getAds();
   },
   methods: {
+    Convert(datetime) {
+      return ConvertNpm.dateToString(datetime);
+    },
+
     async getCustomerTypes() {
       const response = await CustomerTypeService.getCustomerTypes();
       if (response && response.data) {
@@ -190,6 +255,7 @@ export default {
         this.ads = response.data;
       }
     },
+    deleteAd() {},
   },
 };
 </script>
