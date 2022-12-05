@@ -1,13 +1,16 @@
 <template>
   <div class="service">
-    <img src="@/assets/dichvu.jpg" alt="" />
+    <img :src="service.imagePath" alt="" />
     <h3>{{ service.name }}</h3>
     <h5>{{ service.price }} VNĐ</h5>
-    <button class="btn-primary-yellow">
-      <router-link :to="'/services/' + service.Id" class="router-item" style="text-decoration: none; color: white"
-        >More info</router-link
-      >
-    </button>
+    <div class="footer">
+      <button class="btn-primary-yellow">
+        <router-link :to="'/services/' + service.Id" class="router-item" style="text-decoration: none; color: white"
+          >More info</router-link
+        >
+      </button>
+      <button class="btn-delete" @click="showDeleteServiceDialog(service.Id)">Delete</button>
+    </div>
   </div>
 </template>
 <script>
@@ -15,6 +18,9 @@ export default {
   props: {
     service: {
       type: Object,
+    },
+    showDeleteServiceDialog: {
+      type: Function,
     },
   },
   data() {
@@ -69,5 +75,14 @@ h5 {
   display: -webkit-box;
   -webkit-line-clamp: 7;
   -webkit-box-orient: vertical;
+}
+
+.footer {
+  display: flex;
+}
+
+.btn-delete {
+  background-color: red;
+  color: #ffffff;
 }
 </style>

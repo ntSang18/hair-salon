@@ -51,7 +51,7 @@
           </div>
 
           <div style="position: relative">
-            <img class="avatar" :src="'http://' + this.$store.state.staff.imagePath" alt="" @click="over" />
+            <img class="avatar" :src="this.$store.state.staff.imagePath" alt="" @click="over" />
             <div class="info-account">
               <div class="name">{{ name }}</div>
               <div style="margin-top: 10px" class="item">

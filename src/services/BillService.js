@@ -15,9 +15,10 @@ class BillService extends BaseService {
     }
   }
 
-  async getBills(startDate, endDate) {
+  async getBills(startDate, endDate, page, pageSize) {
     let query = `${this.entity}`;
     if (startDate && endDate) query += `?startDate=${startDate}&endDate=${endDate}`;
+    if (page && pageSize) query += `&page=${page}&pageSize=${pageSize}`;
     try {
       const res = await this.request().get(query);
       return res;
