@@ -128,6 +128,7 @@
 import Title from '@/components/admin/Title';
 import CustomerService from '@/services/CustomerService';
 import GENDERS from '@/common/gender';
+import ConvertNpm from '@hvtruong2209/convert-datetime';
 import { TYPES } from '@/common/customerType';
 export default {
   components: {
@@ -253,7 +254,7 @@ export default {
       }
     },
     convertDateTimeToDate(datetime) {
-      return String(datetime).slice(0, 10);
+      return ConvertNpm.dateToString(datetime);
     },
   },
 };
