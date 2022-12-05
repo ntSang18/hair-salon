@@ -122,7 +122,7 @@ export default {
       if (this.imagePicked) {
         return this.accountInfo.imagePath;
       } else {
-        return 'http://' + this.accountInfo.imagePath;
+        return this.accountInfo.imagePath;
       }
     },
   },
