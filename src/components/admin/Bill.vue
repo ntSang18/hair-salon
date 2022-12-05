@@ -125,7 +125,6 @@ export default {
       this.bill.subTotal = sum;
       this.bill.total = this.bill.subTotal;
       if (this.bill.discount != 0) {
-        console.log(this.bill.discount, this.bill.subTotal);
         this.bill.total = this.bill.subTotal - (this.bill.discount / 100) * this.bill.subTotal;
       }
       if (this.booking.advertisement && this.booking.advertisement.discount != 0) {
@@ -155,7 +154,6 @@ export default {
       };
       const response = await BillService.createBillWithBooking(data);
       if (response && response.data) {
-        console.log('update status');
         // update status confirm to done
         // await this.updateStatusBooking();
         // emit dong form

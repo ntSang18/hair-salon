@@ -75,23 +75,6 @@
             </div>
           </template>
         </el-table-column>
-        <!-- <el-table-column label="Rate" width="100px" sortable prop="_count.rates">
-          <template #default="scope">
-            <div style="display: flex; align-items: center; justify-content: center">
-              <div>
-                {{ scope.row._count.rates }}
-              </div>
-              <div class="icon" style="display: inline-block">
-                <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-029747aa="">
-                  <path
-                    fill="#fab005"
-                    d="M283.84 867.84 512 747.776l228.16 119.936a6.4 6.4 0 0 0 9.28-6.72l-43.52-254.08 184.512-179.904a6.4 6.4 0 0 0-3.52-10.88l-255.104-37.12L517.76 147.904a6.4 6.4 0 0 0-11.52 0L392.192 379.072l-255.104 37.12a6.4 6.4 0 0 0-3.52 10.88L318.08 606.976l-43.584 254.08a6.4 6.4 0 0 0 9.28 6.72z"
-                  ></path>
-                </svg>
-              </div>
-            </div>
-          </template>
-        </el-table-column> -->
         <el-table-column property="Booking" label="Booking" width="100">
           <template #default="scope">
             <div class="d-flex justify-content-center">
@@ -187,6 +170,7 @@
 import Title from '@/components/admin/Title';
 import StaffService from '@/services/StaffService';
 import GENDERS from '@/common/gender';
+import ConvertNpm from '@hvtruong2209/convert-datetime';
 
 export default {
   components: {
@@ -366,7 +350,7 @@ export default {
       if (this.selectAccounts.length == 0) this.$store.state.toast.error('No account is choose!');
     },
     convertDateTimeToDate(datetime) {
-      return String(datetime).slice(0, 10);
+      return ConvertNpm.dateToString(datetime);
     },
   },
 };
@@ -377,12 +361,6 @@ export default {
   padding: -20px -20px;
   height: calc(100vh - 100px);
 }
-/* .icon {
-  margin-right: 5px;
-  height: 30px;
-  width: 30px;
-  fill: #757575;
-} */
 p {
   font-size: 18px;
   margin-left: 10px;
@@ -418,7 +396,4 @@ p {
   height: 40px;
   margin-bottom: 10px;
 }
-/* .icon:hover {
-  cursor: pointer;
-} */
 </style>

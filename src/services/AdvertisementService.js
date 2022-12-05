@@ -6,7 +6,16 @@ class AdvertisementService extends BaseService {
 
   async getAds() {
     try {
-      const res = await this.request_service_ad().get(`${this.entity}`);
+      const res = await this.request().get(`${this.entity}`);
+      return res;
+    } catch (err) {
+      return err;
+    }
+  }
+
+  async getAd(id) {
+    try {
+      const res = await this.request().get(`${this.entity}/${id}`);
       return res;
     } catch (err) {
       return err;

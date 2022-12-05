@@ -33,7 +33,7 @@ class ServiceService extends BaseService {
   }
   async createService(service) {
     try {
-      const res = await this.request().post(`${this.entity}`, { ...service });
+      const res = await this.request().post(`${this.entity}`, service);
       return res;
     } catch (err) {
       return err.response;
@@ -42,6 +42,14 @@ class ServiceService extends BaseService {
   async updateService(service) {
     try {
       const res = await this.request().patch(`${this.entity}/${service.Id}`, { ...service });
+      return res;
+    } catch (err) {
+      return err.response;
+    }
+  }
+  async deleteService(obj) {
+    try {
+      const res = await this.request().delete(`${this.entity}`, { data: { ...obj } });
       return res;
     } catch (err) {
       return err.response;

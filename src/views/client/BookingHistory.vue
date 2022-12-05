@@ -1,123 +1,111 @@
 <template>
-  <section id="page-header" class="booking-history">
-    <div class="header-content">
-      <h2>Take care of your hair</h2>
-      <p>Make an appointment with us now</p>
-    </div>
-  </section>
+  <div>
+    <section id="page-header" class="booking-history">
+      <div class="header-content">
+        <h2>Take care of your hair</h2>
+        <p>Make an appointment with us now</p>
+      </div>
+    </section>
 
-  <section id="booking-history" class="section-p1">
-    <h2>Booking History</h2>
-    <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text</p>
-    <div class="table-container">
-      <el-table
-        :data="filterTableData"
-        :default-sort="{ prop: 'date' }"
-        style="width: 100%"
-        :row-class-name="tableRowClassName"
-      >
-        <el-table-column prop="date" label="Date" sortable width="150" />
-        <el-table-column prop="services" label="Services" />
-        <el-table-column prop="stylist" label="Stylist" width="150" />
-        <el-table-column
-          prop="status"
-          label="Status"
-          width="150"
-          :filters="[
-            { text: 'Pending', value: 'Pending' },
-            { text: 'Process', value: 'Process' },
-            { text: 'Completed', value: 'Completed' },
-          ]"
-          :filter-method="filterTag"
-          filter-placement="bottom-end"
+    <section id="booking-history" class="section-p1">
+      <h2>Booking History</h2>
+      <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text</p>
+      <div class="table-container">
+        <el-table
+          :data="filterTableData"
+          :default-sort="{ prop: 'date' }"
+          style="width: 100%"
+          :row-class-name="tableRowClassName"
         >
-          <template #default="scope">
-            <el-tag>{{ scope.row.status }}</el-tag>
-          </template>
-        </el-table-column>
-        <el-table-column align="right">
-          <template #header>
-            <el-input v-model="search" size="small" placeholder="Type to search" />
-          </template>
-          <template #default="scope">
-            <el-button
-              :disabled="!cancelableBooking(scope.row)"
-              size="small"
-              @click="handleCancel(scope.$index, scope.row)"
-              >Cancel</el-button
-            >
-            <el-button
-              :disabled="!ratableBooking(scope.$index)"
-              type="primary"
-              size="small"
-              @click="openRateDialog(scope.$index)"
-              >Rating</el-button
-            >
-            <el-button size="small" type="danger" @click="handleDelete(scope.$index)">Delete</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-    </div>
+          <el-table-column prop="date" label="Date" sortable width="150" />
+          <el-table-column prop="services" label="Services" />
+          <el-table-column prop="stylist" label="Stylist" width="150" />
+          <el-table-column
+            prop="status"
+            label="Status"
+            width="150"
+            :filters="[
+              { text: 'Pending', value: 'Pending' },
+              { text: 'Process', value: 'Process' },
+              { text: 'Completed', value: 'Completed' },
+            ]"
+            :filter-method="filterTag"
+            filter-placement="bottom-end"
+          >
+            <template #default="scope">
+              <el-tag>{{ scope.row.status }}</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column align="right">
+            <template #header>
+              <el-input v-model="search" size="small" placeholder="Type to search" />
+            </template>
+            <template #default="scope">
+              <el-button
+                :disabled="!cancelableBooking(scope.row)"
+                size="small"
+                @click="handleCancel(scope.$index, scope.row)"
+                >Cancel</el-button
+              >
+              <el-button
+                :disabled="!ratableBooking(scope.$index)"
+                type="primary"
+                size="small"
+                @click="openRateDialog(scope.$index)"
+                >Rating</el-button
+              >
+              <el-button size="small" type="danger" @click="handleDelete(scope.$index)">Delete</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
 
-    <div class="pagination">
-      <el-pagination
-        background
-        layout="prev, pager, next"
-        :page-size="pagination.pageSize"
-        :page-count="pagination.totalPage"
-        v-model:current-page="pagination.page"
-        @current-change="getBookingHistory()"
-      />
-    </div>
+      <div class="pagination">
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :page-size="pagination.pageSize"
+          :page-count="pagination.totalPage"
+          v-model:current-page="pagination.page"
+          @current-change="getBookingHistory()"
+        />
+      </div>
 
-    <el-dialog v-model="dialogCreate" width="35%" center>
-      <template #header>
-        <span class="header-dialog">Rating stylist</span>
-      </template>
-      <template #default>
-        <div class="rating">
-          <div class="star-widget">
-            <input type="radio" id="rate-5" :value="5" v-model="rate" />
-            <label for="rate-5" class="bx bxs-star"></label>
-            <input type="radio" id="rate-4" :value="4" v-model="rate" />
-            <label for="rate-4" class="bx bxs-star"></label>
-            <input type="radio" id="rate-3" :value="3" v-model="rate" />
-            <label for="rate-3" class="bx bxs-star"></label>
-            <input type="radio" id="rate-2" :value="2" v-model="rate" />
-            <label for="rate-2" class="bx bxs-star"></label>
-            <input type="radio" id="rate-1" :value="1" v-model="rate" />
-            <label for="rate-1" class="bx bxs-star"></label>
-          </div>
-          <form action="#">
-            <header id="header-review">&nbsp; {{ ratingReview }}</header>
-            <div class="textarea">
-              <textarea name="review" cols="40" placeholder="Describer your experience..."></textarea>
+      <el-dialog v-model="dialogCreate" width="35%" center>
+        <template #header>
+          <span class="header-dialog">Rating stylist</span>
+        </template>
+        <template #default>
+          <div class="rating">
+            <div class="star-widget">
+              <input type="radio" id="rate-5" :value="5" v-model="rate" />
+              <label for="rate-5" class="bx bxs-star"></label>
+              <input type="radio" id="rate-4" :value="4" v-model="rate" />
+              <label for="rate-4" class="bx bxs-star"></label>
+              <input type="radio" id="rate-3" :value="3" v-model="rate" />
+              <label for="rate-3" class="bx bxs-star"></label>
+              <input type="radio" id="rate-2" :value="2" v-model="rate" />
+              <label for="rate-2" class="bx bxs-star"></label>
+              <input type="radio" id="rate-1" :value="1" v-model="rate" />
+              <label for="rate-1" class="bx bxs-star"></label>
             </div>
-          </form>
-        </div>
-      </template>
-      <template #footer>
-        <span class="dialog-footer">
-          <el-button @click="dialogCreate = false">Cancel</el-button>
-          <el-button type="primary" @click="handleRate()"> Confirm </el-button>
-        </span>
-      </template>
-    </el-dialog>
-  </section>
-
-  <section id="newsletter">
-    <div class="newstext">
-      <h4>Sign Up For Newsletters</h4>
-      <p>
-        Get E-mail updates about our services and
-        <span>special offers.</span>
-      </p>
-    </div>
-    <div class="form">
-      <input type="text" placeholder="Your email address" />
-      <button>Sign up</button>
-    </div>
-  </section>
+            <form action="#">
+              <header id="header-review">&nbsp; {{ ratingReview }}</header>
+              <div class="textarea">
+                <textarea name="review" cols="40" placeholder="Describer your experience..."></textarea>
+              </div>
+            </form>
+          </div>
+        </template>
+        <template #footer>
+          <span class="dialog-footer">
+            <el-button @click="dialogCreate = false">Cancel</el-button>
+            <el-button type="primary" @click="handleRate()"> Confirm </el-button>
+          </span>
+        </template>
+      </el-dialog>
+    </section>
+  </div>
 </template>
 
 <script>
@@ -217,7 +205,6 @@ export default {
         const res = await BookingService.updateBooking(obj);
         if (res.status == '200') {
           if (booking.status == 'Confirm') {
-            console.log('confirmBooking');
             this.eventBus.emit('resetBookingConfirmData');
           }
           this.$store.state.toast.success('Cancel successful!');
@@ -250,7 +237,6 @@ export default {
     async handleDelete(index) {
       const id = this.bookings[index].Id;
       const res = await BookingService.softDeleteBooking(id);
-      console.log(res);
       if (res.status == '200') {
         this.bookings.splice(index, 1);
         this.$store.state.toast.success('Delete successful!');

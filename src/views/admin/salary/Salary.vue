@@ -136,8 +136,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.budget {
-}
-</style>

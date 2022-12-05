@@ -13,6 +13,7 @@ import Register from '@/views/client/Register.vue';
 import Account from '@/views/client/Account.vue';
 import ChangePassword from '@/views/client/ChangePassword.vue';
 import BookingHistory from '@/views/client/BookingHistory.vue';
+import Advertisement from '@/views/client/Advertisement.vue';
 
 const routes = [
   {
@@ -98,6 +99,15 @@ const routes = [
         component: BookingHistory,
         meta: {
           title: 'Booking History',
+        },
+      },
+      {
+        path: '/salon/advertisement/:aid',
+        name: 'Advertisement',
+        component: Advertisement,
+        props: true,
+        meta: {
+          title: 'Advertisement',
         },
       },
     ],
