@@ -12,16 +12,11 @@
         <div class="label d-inline-block">Customer:</div>
         <el-input class="input" v-model="customerPhone" placeholder="Phone ..." />
         <button class="btn-search" @click="searchPhone">Search</button>
-
-        <div v-if="showCustomer == 'customer'" style="margin: 10px 0px 10px 120px">
-          <div><span style="display: inline-block; width: 100px">Name:</span>{{ customer.name }}</div>
-          <div><span style="display: inline-block; width: 100px">Type:</span> {{ customer.customerType.name }}</div>
-          <div>
-            <span style="display: inline-block; width: 100px">Discount:</span>{{ customer.customerType.percent }}
-          </div>
+        <div v-if="showCustomer == 'customer'" class="coupon-message success">
+          {{ customerMessage }}
         </div>
-        <div v-if="showCustomer == 'noCustomer'" style="margin: 10px 0px 10px 120px">
-          <div>No customer!</div>
+        <div v-if="showCustomer == 'noCustomer'" class="coupon-message error">
+          {{ customerMessage }}
         </div>
         <div v-if="errorPhone">This field is require!</div>
         <div v-if="bill.customer">{{ bill.customer.name }}</div>
@@ -37,11 +32,9 @@
         <div v-if="showVoucher == 'voucher'" class="coupon-message success">
           {{ couponMessage() }}
         </div>
-        <!-- <div v-if="showVoucher == 'noVoucher'" style="margin: 10px 0px 10px 120px"> -->
         <div v-if="showVoucher == 'noVoucher'" class="coupon-message error">
           {{ couponMessage() }}
         </div>
-        <!-- </div> -->
         <div class="label">Service:</div>
         <el-tree
           ref="treeRef"
@@ -108,6 +101,16 @@ export default {
       this.customers = this.customers.filter(el => el.phone.includes(this.customerPhone));
     },
   },
+  computed: {
+    customerMessage() {
+      if (this.customer) {
+        return `${this.customer.name || this.customer.phone} - Percent discount: ${
+          this.customer.customerType.percent
+        }%`;
+      }
+      return 'Not found customer!';
+    },
+  },
   methods: {
     clickPayment() {
       this.bill.serviceArray = this.$refs.treeRef.getCheckedNodes();
@@ -152,12 +155,15 @@ export default {
       }
     },
     async searchPhone() {
+      this.customer = null;
       const response = await CustomerService.searchCustomers(null, null, this.customerPhone);
       if (response && response.data) {
         if (response.data.customers.length == 1) {
           this.customer = response.data.customers[0];
           this.showCustomer = 'customer';
-        } else this.showCustomer = 'noCustomer';
+        } else {
+          this.showCustomer = 'noCustomer';
+        }
       }
     },
     async createBill() {
